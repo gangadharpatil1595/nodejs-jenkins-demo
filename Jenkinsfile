@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm install'
-                sh 'npm test || true'  // skip failure if no tests
+                sh 'npm test || true'  // if no tests, pipeline won’t fail
             }
         }
 
@@ -50,7 +50,7 @@ pipeline {
 
     post {
         success {
-            echo "✅ Deployment successful! Your app is running on http://65.2.175.22:3000"
+            echo "✅ Deployed successfully! Visit http://65.2.175.22:3000"
         }
         failure {
             echo "❌ Deployment failed. Check logs."
