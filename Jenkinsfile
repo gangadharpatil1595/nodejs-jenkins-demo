@@ -50,10 +50,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Deployed successfully! Visit http://65.2.175.22:3000"
+            echo "Deployed successfully! Visit http://65.2.175.22:3000"
         }
         failure {
-            echo "❌ Deployment failed. Check logs."
+            echo "Deployment failed. Check logs."
         }
     }
 }
