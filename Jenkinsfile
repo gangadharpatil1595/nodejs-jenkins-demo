@@ -32,14 +32,18 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-                    sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                }
-            }
+       stage('Push Docker Image') {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+            sh """
+                echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} $DOCKER_USER/nodejs-jenkins-demo:${DOCKER_TAG}
+                docker push $DOCKER_USER/nodejs-jenkins-demo:${DOCKER_TAG}
+            """
         }
+    }
+}
+
 
         stage('Deploy to Kubernetes') {
             steps {
