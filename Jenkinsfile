@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "your-dockerhub-username/nodejs-jenkins-demo"
+        DOCKER_IMAGE = "gangadhar369/nodejs-jenkins-demo"
         DOCKER_TAG = "latest"
     }
 
@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/your-repo/nodejs-jenkins-demo.git'
+                    url: 'https://github.com/gangadharpatil1595/nodejs-jenkins-demo.git'
             }
         }
 
